@@ -1,7 +1,7 @@
 <template>
-    <Page>
-        <ActionBar>
-            <Label text="Home"/>
+    <Page class="page">
+        <ActionBar class="ab">
+            <Label text="Networking" class="header"/>
         </ActionBar>
         
         <Label text="hello" />

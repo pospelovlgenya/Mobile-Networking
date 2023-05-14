@@ -1,3 +1,35 @@
 @import '@nativescript/theme/core';
 @import '@nativescript/theme/default';
 
+.page {
+  place-items: center;
+  place-content: center;
+  background-color: #000;
+  color: #FFF;
+  text-align: center;
+  font-size: 20pt;
+}
+
+.ab {
+  background-color: #FF0;
+}
+
+.header {
+  font-size: 30pt;
+  place-items: center;
+  place-content: center;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
+  color:  #000;
+}
+
+.button {
+  font-size: 20pt;
+  text-align: center;
+  margin: 10px, 10px, 10px, 10px;
+  background-color: #000;
+  color: #FF0;
+  border: #FFF;
+  border-radius: 25px;
+  box-shadow: 0 0 20px #FFF;
+}

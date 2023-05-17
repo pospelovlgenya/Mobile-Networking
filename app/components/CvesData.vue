@@ -1,14 +1,10 @@
 <template>
-  <Page class="page">
+	<Page class="page">
 		<ActionBar class="ab">
-			<Label text="Main Info" class="header" />
+			<Label text="Cves Info" class="header" />
 		</ActionBar>
 		<GridLayout rows="*, auto" columns="*">
-			<FlexboxLayout row="0" flexDirection="column" >
-					<Label :text="Object.keys(req)" textWrap="true" />
-					<Label :text="req[item]" textWrap="true" v-for="item in Object.keys(req)" />
-			</FlexboxLayout>
-			
+
 			<FlexboxLayout row="1" flexDirection="column">
 				<GridLayout rows="auto" columns="*, *, *">
 					<Image col="0" src="~/assets/Search.png" height="50" width="33%" stretch="aspectFit" class="button" @tap="ToPage(0)" />
@@ -26,22 +22,22 @@ import Home from "./Home.vue"
 import Main from "./MainData.vue"
 import Cves from "./CvesData.vue"
 export default {
-  data () {
-    return {
+	data () {
+		return {
 			Pages: [Home, Main, Cves],
 			req: [],
 		};
-  },
+	},
 	beforeMount() {
 		if (ApplicationSettings.getString("req")) {
 			this.req = JSON.parse(ApplicationSettings.getString("req"));
 		}
 	},
-  methods: {
+	methods: {
 		ToPage(id) {
 			this.$navigateTo(this.Pages[id]);
 		}
-  }
+	}
 };
 </script>
 

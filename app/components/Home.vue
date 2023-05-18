@@ -9,7 +9,8 @@
       <Button row="2" text="Find this ip" @tap="find()" />
 
 			<FlexboxLayout row="4" flexDirection="column">
-				<Label :text="item.ip" textWrap="true" v-for="(item, key) in history" @key="key" @tap="findhist(key)"/>
+        <Label text="Search history:" textWrap="true" width="50%" class="datablock" />
+				<Label :text="item.ip" textWrap="true" width="50%" itemWidth="50%" v-for="(item, key) in history" @key="key" @tap="findhist(key)" class="button" />
 			</FlexboxLayout>
     </GridLayout>
     
@@ -46,12 +47,12 @@ export default {
       this.ToPage();
     },
 		async findhist(id) {
-			const response = await fetch("https://api.shodan.io/shodan/host/" + String(this.history[id].ip) + "?key=X9bo1JfYKqcrKIzslhW90OzH3VagvbTW");
+			const response = await fetch("https://api.shodan.io/shodan/host/" + this.history[id].ip + "?key=X9bo1JfYKqcrKIzslhW90OzH3VagvbTW");
       const req = await response.json();
-			this.save(req);
+			await this.save(req);
       this.ToPage();
 		},
-		save(req) {
+		async save(req) {
 			ApplicationSettings.setString("history", JSON.stringify(Object.assign({}, this.history)));
 			ApplicationSettings.setString("req", JSON.stringify(Object.assign({}, req)));
 		},

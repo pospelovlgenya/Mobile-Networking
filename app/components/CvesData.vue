@@ -37,19 +37,18 @@ export default {
 		return {
 			Pages: [Home, Main, Cves],
 			show: [],
-			req: {},
 		};
 	},
 	beforeMount() {
 		if (ApplicationSettings.getString("req")) {
-			this.req = JSON.parse(ApplicationSettings.getString("req"));
-		}
-		if (this.req['vulns']) {
-			var cves = this.req['data'][0]['vulns'];
-			if (cves) {
-				var keys_cves = Object.keys(cves);
-				for (var j = 0; j < keys_cves.length; j++) {
-					this.show.push({name: keys_cves[j], summary: cves[keys_cves[j]]['summary']});
+			const req = JSON.parse(ApplicationSettings.getString("req"));
+			if (req['vulns']) {
+				var cves = req['data'][0]['vulns'];
+				if (cves) {
+					var keys_cves = Object.keys(cves);
+					for (var j = 0; j < keys_cves.length; j++) {
+						this.show.push({name: keys_cves[j], summary: cves[keys_cves[j]]['summary']});
+					}
 				}
 			}
 		}

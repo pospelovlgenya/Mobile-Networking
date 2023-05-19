@@ -2,20 +2,21 @@
   <Page class="page">
     <ActionBar class="ab">
       <Label text="Networking" class="header" />
-    </ActionBar>       
-     
+    </ActionBar>
+
     <GridLayout rows="*, auto, auto, *, auto, *" columns="*">
+
       <ActivityIndicator row="0" :busy="loadData" />
 
       <TextField row="1" v-model="ip" class="textbar" />
-      <Label row="2" text="Find this ip" @tap="find()" class="button"/>
+      <Label row="2" text="Find this ip" @tap="find()" class="button" />
 
-			<FlexboxLayout row="4" flexDirection="column">
+      <FlexboxLayout row="4" flexDirection="column">
         <Label text="Search history:" textWrap="true" width="50%" class="datablock" />
-				<Label :text="item" textWrap="true" width="50%" itemWidth="50%" v-for="(item, key) in history" @key="key" @tap="findhist(key)" class="button" />
-			</FlexboxLayout>
+        <Label :text="item" textWrap="true" width="50%" itemWidth="50%" v-for="(item, key) in history" @key="key" @tap="findhist(key)" class="button" />
+      </FlexboxLayout>
+
     </GridLayout>
-    
   </Page>
 </template>
 
@@ -27,19 +28,18 @@ export default {
     return {
       ip: '',
       history: [],
-      show: {},
       loadData: false,
       regex: /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/,
     };
   },
   beforeMount() {
     if (ApplicationSettings.getString("history")) {
-      this.history = ApplicationSettings.getString("history").split(',') ;
+      this.history = ApplicationSettings.getString("history").split(',');
     }
   },
   methods: {
     async find() {
-      if (!(this.regex.test(this.ip))){
+      if (!(this.regex.test(this.ip))) {
         return;
       }
       this.loadData = true;
@@ -61,7 +61,6 @@ export default {
       this.loadData = true;
       const response = await fetch("https://api.shodan.io/shodan/host/" + this.history[id] + "?key=X9bo1JfYKqcrKIzslhW90OzH3VagvbTW");
       const req = await response.json();
-      this.show = req;
       await this.save(req);
       this.ToPage();
     },
@@ -76,6 +75,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
